@@ -38,7 +38,7 @@ class MyWindow : public Window {
   virtual void mouseMotion(int x, int y, int dx, int dy) {
     if (mouseIsDown(GLFW_MOUSE_BUTTON_LEFT)) {
       // todo: store a circle with the current color, size, x, y
-      Circle newCircle{x,y,brushSize,globalColor};
+      struct Circle newCircle{x,y,brushSize,globalColor};
       circles.push_back(newCircle);
 
     }
@@ -105,7 +105,7 @@ class MyWindow : public Window {
       circle(col.x,col.y,col.size);
     }
     //draw background
-    for (Circle c : circles){
+    for (struct Circle c : circles){
       // circle(x,y,diameter);
       color(c.col[0],c.col[1],c.col[2]);
       circle(c.x,c.y,c.size);
@@ -122,12 +122,12 @@ class MyWindow : public Window {
   float globalColor[3] = {1.0f,0.1f,0.5f};
 
   // list of circles to draw each frame
-  std::vector<Circle> circles;
+  std::vector<struct Circle> circles;
 
-  Circle c{250,250,1.0f,globalColor};
+  struct Circle c{250,250,1.0f,globalColor};
   circles.push_back(c);
   // color pallet
-  std::vector<Circle> pallet;
+  std::vector<struct Circle> pallet;
   //5 rows (colors:black,white,red,yellow,blue) 3 columns (values:r,g,b)
   float colors[5][3] = {{0.0f,0.0f,0.0f},
                         {1.0f,1.0f,1.0f},
@@ -137,7 +137,7 @@ class MyWindow : public Window {
                         };
 
   for (int i = 1; i < 6; i ++){
-    Circle c{i*width()/6,10,10,colors[i]};
+    struct Circle c{i*width()/6,10,10,colors[i]};
     pallet.push_back(c);
   }
   
