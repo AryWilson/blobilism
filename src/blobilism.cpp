@@ -34,8 +34,8 @@ class MyWindow : public Window {
   };
 
   struct Circle {
-    int x;
-    int y;
+    float x;
+    float y;
     float size;
     ColorRGB col;
     float alpha;
@@ -140,11 +140,11 @@ class MyWindow : public Window {
   struct ColorRGB g{0.05f,1.0f,0.1f}; 
   struct ColorRGB bl{0.05f,0.05f,1.0f}; 
 
-  struct Circle black{1*width()/6,35,55,b,1.0f};
-  struct Circle white{2*width()/6,35,55,w,1.0f};
-  struct Circle red{3*width()/6,35,55,r,1.0f};
-  struct Circle yellow{4*width()/6,35,55,g,1.0f};
-  struct Circle blue{5*width()/6,35,55,bl,1.0f};
+  struct Circle black{1*width()/6.0f,35,55,b,1.0f};
+  struct Circle white{2*width()/6.0f,35,55,w,1.0f};
+  struct Circle red{3*width()/6.0f,35,55,r,1.0f};
+  struct Circle yellow{4*width()/6.0f,35,55,g,1.0f};
+  struct Circle blue{5*width()/6.0f,35,55,bl,1.0f};
 
 
   struct Circle pallet[5] = {black,white,red,yellow,blue};
