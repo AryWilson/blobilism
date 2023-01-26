@@ -124,14 +124,14 @@ class MyWindow : public Window {
   std::vector<struct Circle> circles;
   // color pallet
   //5 rows (colors:black,white,red,yellow,blue) 3 columns (values:r,g,b)
-  struct Color black{1*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Color white{2*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Color red{3*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Color yellow{4*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Color blue{5*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Circle black{1*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Circle white{2*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Circle red{3*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Circle yellow{4*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Circle blue{5*width()/6,10,10,{0.0f,0.0f,0.0f}};
 
 
-  float pallet[5] = {black,white,red,yellow,blue};
+  struct Circle pallet[5] = {black,white,red,yellow,blue};
 
 
 };
