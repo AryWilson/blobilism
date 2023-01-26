@@ -34,7 +34,6 @@ class MyWindow : public Window {
     float col[3];
   };
 
-
   virtual void mouseMotion(int x, int y, int dx, int dy) {
     if (mouseIsDown(GLFW_MOUSE_BUTTON_LEFT)) {
       // todo: store a circle with the current color, size, x, y
@@ -123,24 +122,17 @@ class MyWindow : public Window {
 
   // list of circles to draw each frame
   std::vector<struct Circle> circles;
-
-  struct Circle c{250,250,1.0f,globalColor};
-  circles.push_back(c);
   // color pallet
-  std::vector<struct Circle> pallet;
   //5 rows (colors:black,white,red,yellow,blue) 3 columns (values:r,g,b)
-  float colors[5][3] = {{0.0f,0.0f,0.0f},
-                        {1.0f,1.0f,1.0f},
-                        {1.0f,0.1f,0.1f},
-                        {1.0f,1.0f,0.0f},
-                        {0.1f,0.1f,1.0f}
-                        };
+  struct Color black{1*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Color white{2*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Color red{3*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Color yellow{4*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct Color blue{5*width()/6,10,10,{0.0f,0.0f,0.0f}};
 
-  for (int i = 1; i < 6; i ++){
-    struct Circle c{i*width()/6,10,10,colors[i]};
-    pallet.push_back(c);
-  }
-  
+
+  float pallet[5] = {black,white,red,yellow,blue};
+
 
 };
 
