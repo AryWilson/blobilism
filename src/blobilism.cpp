@@ -12,13 +12,6 @@
 using namespace tinygl;
 
 
-// struct Circle {
-//   int x;
-//   int y;
-//   float size;
-//   float col[3];
-// };
-
 class MyWindow : public Window {
  public:
   MyWindow(int w, int h) : Window(w, h) {}
