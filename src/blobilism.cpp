@@ -27,17 +27,24 @@ class MyWindow : public Window {
     std::cout << "Window size: " << width() << ", " << height() << std::endl;
   }
 
+  struct ColorRGB {
+    float r;
+    float g;
+    float b;
+  };
+
   struct Circle {
     int x;
     int y;
     float size;
-    float col[3];
+    ColorRGB col;
+    float alpha;
   };
 
   virtual void mouseMotion(int x, int y, int dx, int dy) {
     if (mouseIsDown(GLFW_MOUSE_BUTTON_LEFT)) {
       // todo: store a circle with the current color, size, x, y
-      struct Circle newCircle{x,y,brushSize,globalColor};
+      struct Circle newCircle{x,y,brushSize,globalColor,alpha};
       circles.push_back(newCircle);
 
     }
@@ -48,11 +55,11 @@ class MyWindow : public Window {
       // todo: check if user clicked a color 
       float mx = mouseX();  // current mouse pos x
       float my = mouseY();  // current mouse pos y
-      for(Color col : pallet){
-        float d = sqrt(pow((col.x-mx),2)+pow((col.y-my),2));
-        if (d<col.size) {
+      for(struct Circle c : pallet){
+        float d = sqrt(pow((c.x-mx),2)+pow((c.y-my),2));
+        if (d<c.size) {
           //color clicked
-          globalColor = col.color;
+          globalColor = c.col;
         }
       }
 
@@ -63,12 +70,12 @@ class MyWindow : public Window {
   void keyDown(int key, int mods) {
     if (key == GLFW_KEY_UP) {
       // increase size of circle
-      brushSize += .1;
+      brushSize += 1;
     } 
     else if (key == GLFW_KEY_DOWN) {
       // decrease size of circle
       if(brushSize > 0){
-        brushSize -= .1;
+        brushSize -= 1;
       }
     }
     else if (key == GLFW_KEY_LEFT) {
@@ -80,7 +87,10 @@ class MyWindow : public Window {
     }
     else if (key == GLFW_KEY_RIGHT) {
       // increase alpha
-      alpha += .1;
+      if(alpha<1){
+        alpha += .1;
+      }
+      
 
     }
     else if (key == GLFW_KEY_C) {
@@ -99,14 +109,14 @@ class MyWindow : public Window {
     // todo : draw pallet
     color(0.1f, 0.1f, 0.1f);
     square(width()/2.0f, 35, width(), 70); //ceterx, centery, width, height
-    for (Color col : pallet) {
-      color(col.color[0],col.color[1],col.color[2]);
-      circle(col.x,col.y,col.size);
+    for (struct Circle c : pallet) {
+      color(c.col.r,c.col.g,c.col.b);
+      circle(c.x,c.y,c.size);
     }
-    //draw background
+    //draw drawing
     for (struct Circle c : circles){
       // circle(x,y,diameter);
-      color(c.col[0],c.col[1],c.col[2]);
+      color(c.col.r,c.col.g,c.col.b,c.alpha);
       circle(c.x,c.y,c.size);
     }
   }
@@ -114,21 +124,27 @@ class MyWindow : public Window {
 
   // todo: create member variables for 
   // current circle size
-  float brushSize=1;
+  float brushSize=10;
   // current transparency
   float alpha = 1;
   // current color
-  float globalColor[3] = {1.0f,0.1f,0.5f};
+  struct ColorRGB globalColor{0.0f,0.0f,0.0f};
 
   // list of circles to draw each frame
   std::vector<struct Circle> circles;
   // color pallet
   //5 rows (colors:black,white,red,yellow,blue) 3 columns (values:r,g,b)
-  struct Circle black{1*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Circle white{2*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Circle red{3*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Circle yellow{4*width()/6,10,10,{0.0f,0.0f,0.0f}};
-  struct Circle blue{5*width()/6,10,10,{0.0f,0.0f,0.0f}};
+  struct ColorRGB b{0.0f,0.0f,0.0f}; 
+  struct ColorRGB w{1.0f,1.0f,1.0f}; 
+  struct ColorRGB r{1.0f,0.1f,0.1f}; 
+  struct ColorRGB g{0.05f,1.0f,0.1f}; 
+  struct ColorRGB bl{0.05f,0.05f,1.0f}; 
+
+  struct Circle black{1*width()/6,35,55,b,1.0f};
+  struct Circle white{2*width()/6,35,55,w,1.0f};
+  struct Circle red{3*width()/6,35,55,r,1.0f};
+  struct Circle yellow{4*width()/6,35,55,g,1.0f};
+  struct Circle blue{5*width()/6,35,55,bl,1.0f};
 
 
   struct Circle pallet[5] = {black,white,red,yellow,blue};
