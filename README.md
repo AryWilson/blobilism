@@ -8,8 +8,9 @@ This demo implements a simple drawing program based on a circle brush.
 * Clears the image
 
 ## Results
-
-TODO: Put images of what you've made here
+![Alt text](/1.png?raw=true)
+![Alt text](/2.png?raw=true)
+![Alt text](/3.png?raw=true)
 
 ## How to build
 

@@ -98,17 +98,19 @@ class MyWindow : public Window {
   void draw() override {
     background(0.95f, 0.95f, 0.95f);
 
-    // draw pallet
-    color(0.1f, 0.1f, 0.1f);
-    square(width()/2.0f, 35, width(), 70); //ceterx, centery, width, height
-    for (struct Circle c : pallet) {
-      color(c.col.r,c.col.g,c.col.b);
-      circle(c.x,c.y,c.size);
-    }
+    
     //display drawing, draw evey stored circle
     for (struct Circle c : circles){
       // circle(x,y,diameter);
       color(c.col.r,c.col.g,c.col.b,c.alpha);
+      circle(c.x,c.y,c.size);
+    }
+    
+    // draw pallet on top of drawing
+    color(0.1f, 0.1f, 0.1f);
+    square(width()/2.0f, 35, width(), 70); //ceterx, centery, width, height
+    for (struct Circle c : pallet) {
+      color(c.col.r,c.col.g,c.col.b);
       circle(c.x,c.y,c.size);
     }
   }
